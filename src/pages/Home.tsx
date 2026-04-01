@@ -52,16 +52,18 @@ export default function Home() {
 
       <div className="phone-grid">
         {phoneList.map((phone) => (
-          <div key={phone.id + "_" + crypto.randomUUID()} className="phone-card">
-            <img
-              src={phone.imageUrl}
-              alt={phone.name}
-            />
-            <h3>{phone.name}</h3>
-            <p>{phone.brand}</p>
-            <p>${phone.basePrice.toFixed(2)}</p>
-            <Link to={`/phone/${phone.id}`}>Ver detalles</Link>
-          </div>
+          <Link key={phone.id + "_" + crypto.randomUUID()} to={`/phone/${phone.id}`} className="phone-card">
+            <div className="phone-card-image-area">
+              <img src={phone.imageUrl} alt={phone.name} />
+            </div>
+            <div className="phone-card-row">
+              <div>
+                <div className="phone-card-brand">{phone.brand}</div>
+                <div className="phone-card-model">{phone.name}</div>
+              </div>
+              <div className="phone-card-price">{phone.basePrice.toFixed(0)} EUR</div>
+            </div>
+          </Link>
         ))}
       </div>
     </div>

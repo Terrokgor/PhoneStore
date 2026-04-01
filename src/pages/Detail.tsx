@@ -144,10 +144,16 @@ export default function Detail() {
           <div className="similar-carousel">
             {similarPhones.map((model) => (
               <Link key={model.id} to={`/phone/${model.id}`} className="similar-card">
-                <img src={model.imageUrl} alt={model.name} />
-                <strong>{model.name}</strong>
-                <span>{model.brand}</span>
-                <span>${model.basePrice.toFixed(2)}</span>
+                <div className="similar-card-image-area">
+                  <img src={model.imageUrl} alt={model.name} />
+                </div>
+                <div className="similar-card-row">
+                  <div>
+                    <div className="similar-card-brand">{model.brand}</div>
+                    <div className="similar-card-model">{model.name}</div>
+                  </div>
+                  <div className="similar-card-price">{model.basePrice.toFixed(0)} EUR</div>
+                </div>
               </Link>
             ))}
           </div>

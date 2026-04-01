@@ -186,9 +186,13 @@
 /* Responsive styles for PhoneStore */
 .phone-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
   padding: 0 1rem;
+}
+
+.phone-card {
+  border: 1px solid #ddd;
 }
 
 @media (max-width: 1024px) {
@@ -205,17 +209,74 @@
   }
 }
 
-.phone-card {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 0.5rem;
-  text-align: center;
+.phone-card,
+.similar-card {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: white;
+  border: 0;
+  border-radius: 0;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
 }
 
-.phone-card img {
-  max-width: 100%;
-  height: auto;
+.phone-card:hover,
+.similar-card:hover {
+  background: #fafafa;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
+.phone-card-image-area,
+.similar-card-image-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem;
+  min-height: 0;
+}
+
+.phone-card-image-area img,
+.similar-card-image-area img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.phone-card-row,
+.similar-card-row {
+  border-top: 1px solid #eee;
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.phone-card-brand,
+.similar-card-brand {
+  font-size: 0.7rem;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.phone-card-model,
+.similar-card-model {
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-top: 0.15rem;
+}
+
+.phone-card-price,
+.similar-card-price {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
 
 .search-input {
   width: 100%;
@@ -567,6 +628,19 @@
 
 @media (prefers-color-scheme: dark) {
   .logo-image {
+    filter: invert(1);
+  }
+}
+
+.cart-icon {
+  height: 18px;
+  width: auto;
+  margin-right: 4px;
+  filter: invert(0);
+}
+
+@media (prefers-color-scheme: dark) {
+  .cart-icon {
     filter: invert(1);
   }
 }

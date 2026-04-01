@@ -12,7 +12,8 @@ export default function Navbar() {
       </Link>
 
       <Link to="/cart" style={styles.cart}>
-        🛒 {cart.length}
+        <img src="/src/assets/bag-icon.svg" alt="Cart" className="cart-icon" />
+        {cart.length}
       </Link>
     </nav>
   );
