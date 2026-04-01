@@ -8,7 +8,7 @@ export default function Navbar() {
   return (
     <nav style={styles.nav}>
       <Link to="/" style={styles.logo}>
-        📱 PhoneStore
+        <img src="/src/assets/logo.svg" alt="PhoneStore logo" className="logo-image" />
       </Link>
 
       <Link to="/cart" style={styles.cart}>

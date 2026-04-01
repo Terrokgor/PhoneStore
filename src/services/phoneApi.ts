@@ -1,13 +1,21 @@
-export const getPhones = (params?: {
+type ApiParams = Record<string, string | number | undefined>;
+
+interface GetPhonesParams extends ApiParams {
   search?: string;
   limit?: number;
-  offset?: number;
-}) => ({
-  endpoint: "/products",
-  params: { ...params },
-});
+}
 
-export const getPhoneById = (id: string) => ({
-  url: `/products/${id}`,
-  method: "GET",
-});
+export function getPhones(params?: GetPhonesParams) {
+  return {
+    method: "GET" as const,
+    endpoint: "/products",
+    params,
+  };
+}
+
+export function getPhoneById(id: string) {
+  return {
+    method: "GET" as const,
+    endpoint: `/products/${id}`,
+  };
+}

@@ -1,27 +1,40 @@
 import { useEffect, useState } from "react";
-import { getPhones } from "../services/phoneApi";
-import type { Phone } from "../types/phone";
+import { Link } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
+import { getPhones } from "../services/phoneApi";
 import { useDebounce } from "../hooks/useDebounce";
+import type { Phone } from "../types/phone";
 
 export default function Home() {
-  const callApi = useApi();
+  const { callApi } = useApi();
+
   const [search, setSearch] = useState("");
   const debouncedSearch = useDebounce(search, 300);
+
   const [phoneList, setPhoneList] = useState<Phone[]>([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setLoading(true);
-    callApi<Phone[]>(getPhones({ search: debouncedSearch }))
-      .then((res) => {
+    const fetchPhones = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const res = await callApi<Phone[]>(
+          getPhones({ search: debouncedSearch, limit: 20 }),
+        );
         setPhoneList(res);
-      })
-      .finally(() => {
+      } catch (err: unknown) {
+        if (err instanceof Error) setError(err.message);
+        else setError("Error desconocido");
+      } finally {
         setLoading(false);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedSearch]);
+      }
+    };
+
+    fetchPhones();
+  }, [debouncedSearch, callApi]);
 
   return (
     <div>
@@ -29,25 +42,25 @@ export default function Home() {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Buscar por nombre o marca..."
-        style={{ padding: "0.5rem", width: "100%", marginBottom: "1rem" }}
+        className="search-input"
       />
 
       {loading && <p>Cargando...</p>}
-      {/* {error && <p style={{ color: "red" }}>{error}</p>} */}
+      {error && <p style={{ color: "red" }}>{error}</p>}
 
       <p>{phoneList.length} resultados encontrados</p>
 
-      <div style={gridStyle}>
-        {phoneList.map((phone: Phone) => (
-          <div key={phone.id + "_" + crypto.randomUUID()} style={cardStyle}>
+      <div className="phone-grid">
+        {phoneList.map((phone) => (
+          <div key={phone.id + "_" + crypto.randomUUID()} className="phone-card">
             <img
               src={phone.imageUrl}
               alt={phone.name}
-              style={{ width: "100%" }}
             />
             <h3>{phone.name}</h3>
             <p>{phone.brand}</p>
             <p>${phone.basePrice.toFixed(2)}</p>
+            <Link to={`/phone/${phone.id}`}>Ver detalles</Link>
           </div>
         ))}
       </div>
@@ -55,14 +68,4 @@ export default function Home() {
   );
 }
 
-const gridStyle = {
-  display: "grid",
-  gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
-  gap: "1rem",
-};
 
-const cardStyle = {
-  border: "1px solid #ddd",
-  borderRadius: "4px",
-  padding: "0.5rem",
-};

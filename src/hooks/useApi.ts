@@ -1,33 +1,61 @@
 const BASE_URL = "https://prueba-tecnica-api-tienda-moviles.onrender.com";
 const API_KEY = "87909682e6cd74208f41a6ef39fe4191";
 
+import { useCallback } from "react";
+
+interface ApiConfig {
+  method?: "GET" | "POST" | "PUT" | "DELETE";
+  endpoint: string;
+  params?: Record<string, string | number | undefined>;
+  body?: unknown;
+}
+
 export function useApi() {
-  async function callApi<T>(config: {
-    endpoint: string;
-    params?: { [key: string]: string | number };
-  }): Promise<T> {
+  const callApi = useCallback(async function <T>(
+    config: ApiConfig,
+  ): Promise<T> {
+    const method = config.method || "GET";
     const url = new URL(`${BASE_URL}${config.endpoint}`);
 
-    if (config.params) {
+    if (config.params && method === "GET") {
       Object.entries(config.params).forEach(([key, value]) => {
-        if (value) url.searchParams.append(key, value.toString());
+        if (value !== undefined && value !== null) {
+          url.searchParams.append(key, value.toString());
+        }
       });
     }
 
-    const res = await fetch(url.toString(), {
-      method: "GET",
-      headers: {
-        "x-api-key": API_KEY,
-        "Content-Type": "application/json",
-      },
-    });
+    const headers: Record<string, string> = {
+      "x-api-key": API_KEY,
+      "Content-Type": "application/json",
+    };
 
-    if (!res.ok) {
-      throw new Error(`Error ${res.status}: ${res.statusText}`);
+    const fetchOptions: RequestInit = {
+      method,
+      headers,
+    };
+
+    if (config.body && (method === "POST" || method === "PUT")) {
+      fetchOptions.body = JSON.stringify(config.body);
     }
 
-    const data = (await res.json()) as T;
-    return data;
-  }
-  return callApi;
+    try {
+      const res = await fetch(url.toString(), fetchOptions);
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        throw new Error(`HTTP ${res.status}: ${res.statusText} - ${errorText}`);
+      }
+
+      const data = await res.json();
+      return data as T;
+    } catch (error) {
+      if (error instanceof Error) {
+        throw error;
+      }
+      throw new Error("Unknown error occurred");
+    }
+  }, []);
+
+  return { callApi };
 }
