@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
 import { getPhones } from "../services/phoneApi";
 import { useDebounce } from "../hooks/useDebounce";
+import PhoneCard from "../components/PhoneCard";
 import type { Phone } from "../types/phone";
 
 export default function Home() {
@@ -52,18 +52,7 @@ export default function Home() {
 
       <div className="phone-grid">
         {phoneList.map((phone) => (
-          <Link key={phone.id + "_" + crypto.randomUUID()} to={`/phone/${phone.id}`} className="phone-card">
-            <div className="phone-card-image-area">
-              <img src={phone.imageUrl} alt={phone.name} />
-            </div>
-            <div className="phone-card-row">
-              <div>
-                <div className="phone-card-brand">{phone.brand}</div>
-                <div className="phone-card-model">{phone.name}</div>
-              </div>
-              <div className="phone-card-price">{phone.basePrice.toFixed(0)} EUR</div>
-            </div>
-          </Link>
+          <PhoneCard key={phone.id + "_" + crypto.randomUUID()} phone={phone} />
         ))}
       </div>
     </div>

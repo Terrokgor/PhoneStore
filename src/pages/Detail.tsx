@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
 import { useCart } from "../hooks/useCart";
 import { getPhoneById, getPhones } from "../services/phoneApi";
+import { SimilarCard } from "../components/SimilarCard";
 import type { Phone, PhoneDetail } from "../types/phone";
 
 export default function Detail() {
@@ -143,18 +144,7 @@ export default function Detail() {
           <h2>Productos similares</h2>
           <div className="similar-carousel">
             {similarPhones.map((model) => (
-              <Link key={model.id} to={`/phone/${model.id}`} className="similar-card">
-                <div className="similar-card-image-area">
-                  <img src={model.imageUrl} alt={model.name} />
-                </div>
-                <div className="similar-card-row">
-                  <div>
-                    <div className="similar-card-brand">{model.brand}</div>
-                    <div className="similar-card-model">{model.name}</div>
-                  </div>
-                  <div className="similar-card-price">{model.basePrice.toFixed(0)} EUR</div>
-                </div>
-              </Link>
+              <SimilarCard key={model.id} phone={model} />
             ))}
           </div>
         </div>

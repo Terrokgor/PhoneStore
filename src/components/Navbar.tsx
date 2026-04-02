@@ -6,7 +6,7 @@ export default function Navbar() {
   const { cart } = useCart();
 
   return (
-    <nav style={styles.nav}>
+    <nav style={styles.nav} className="navbar">
       <Link to="/" style={styles.logo}>
         <img src="/src/assets/logo.svg" alt="PhoneStore logo" className="logo-image" />
       </Link>

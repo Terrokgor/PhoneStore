@@ -1,8 +1,17 @@
+import { useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../hooks/useCart";
+import { CartCard } from "../components/CartCard";
 
 export default function Cart() {
-  const { cart, removeFromCart } = useCart();
+  const { cart, removeFromCart: removeFromCartContext } = useCart();
+
+  const removeFromCart = useCallback(
+    (index: number) => {
+      removeFromCartContext(index);
+    },
+    [removeFromCartContext],
+  );
 
   const total = cart.reduce((sum, item) => sum + item.price, 0);
 
@@ -18,17 +27,7 @@ export default function Cart() {
         <>
           <section className="cart-list">
             {cart.map((item, index) => (
-              <article key={index} className="cart-card">
-                <img src={item.imageUrl} alt={item.name} className="cart-card-image" />
-                <div className="cart-card-details">
-                  <h2>{item.name}</h2>
-                  <p>{item.storage} | {item.color}</p>
-                  <p className="cart-price">{item.price.toFixed(2)} EUR</p>
-                  <button className="cart-remove" onClick={() => removeFromCart(index)}>
-                    Eliminar
-                  </button>
-                </div>
-              </article>
+              <CartCard key={index} item={item} index={index} onRemove={removeFromCart} />
             ))}
           </section>
 

@@ -280,7 +280,7 @@
 
 .search-input {
   width: 100%;
-  max-width: 860px;
+  max-width: none;
   height: 52px;
   padding: 0 1.25rem;
   margin-bottom: 1.25rem;
@@ -292,6 +292,9 @@
   box-sizing: border-box;
   box-shadow: none;
   transition: border-color .2s;
+  position: sticky;
+  top: 70px;
+  z-index: 10;
 }
 
 .search-input:focus {
@@ -321,6 +324,13 @@
   padding-left: 2.5rem;
 }
 
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--bg);
+}
 
 /* Detail page styles */
 .detail-container {
