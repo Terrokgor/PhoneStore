@@ -1,5 +1,6 @@
 import { memo } from "react";
 import type { CartItem } from "../context/CartContext";
+import "./CartCard.css";
 
 interface CartCardProps {
   item: CartItem;

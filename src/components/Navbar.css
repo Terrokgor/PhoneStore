@@ -1,0 +1,32 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--bg);
+}
+
+.logo-image {
+  height: 29px;
+  width: auto;
+  margin-right: 8px;
+  filter: invert(0);
+}
+
+@media (prefers-color-scheme: dark) {
+  .logo-image {
+    filter: invert(1);
+  }
+}
+
+.cart-icon {
+  height: 18px;
+  width: auto;
+  margin-right: 4px;
+  filter: invert(0);
+}
+
+@media (prefers-color-scheme: dark) {
+  .cart-icon {
+    filter: invert(1);
+  }
+}

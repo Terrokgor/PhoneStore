@@ -2,6 +2,7 @@ import { useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../hooks/useCart";
 import { CartCard } from "../components/CartCard";
+import "./Cart.css";
 
 export default function Cart() {
   const { cart, removeFromCart: removeFromCartContext } = useCart();

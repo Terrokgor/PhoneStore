@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { useCart } from "../hooks/useCart";
+import "./Navbar.css";
 
 export default function Navbar() {
   const { cart } = useCart();

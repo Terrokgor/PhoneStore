@@ -4,6 +4,7 @@ import { getPhones } from "../services/phoneApi";
 import { useDebounce } from "../hooks/useDebounce";
 import PhoneCard from "../components/PhoneCard";
 import type { Phone } from "../types/phone";
+import "./Home.css";
 
 export default function Home() {
   const { callApi } = useApi();

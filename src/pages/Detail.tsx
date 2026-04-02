@@ -5,6 +5,7 @@ import { useCart } from "../hooks/useCart";
 import { getPhoneById, getPhones } from "../services/phoneApi";
 import { SimilarCard } from "../components/SimilarCard";
 import type { Phone, PhoneDetail } from "../types/phone";
+import "./Detail.css";
 
 export default function Detail() {
   const { id } = useParams<{ id: string }>();

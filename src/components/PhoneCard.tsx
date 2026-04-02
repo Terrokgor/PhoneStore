@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import type { Phone } from "../types/phone";
+import "./PhoneCard.css";
 
 interface PhoneCardProps {
   phone: Phone;
