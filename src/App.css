@@ -9,3 +9,19 @@
 @import url('./pages/Home.css');
 @import url('./pages/Detail.css');
 @import url('./pages/Cart.css');
+
+button,
+.carousel-nav,
+.add-cart-btn,
+.back-btn {
+  transition: transform 0.15s ease, opacity 0.15s ease, background-color 0.15s ease;
+}
+
+button:active,
+.carousel-nav:active,
+.add-cart-btn:active,
+.back-btn:active {
+  opacity: 0.75;
+  transform: scale(0.98);
+}
+

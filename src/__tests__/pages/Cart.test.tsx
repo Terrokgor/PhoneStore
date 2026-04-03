@@ -1,15 +1,17 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Cart from '../../pages/Cart';
 import { CartProvider } from '../../context/CartContext';
+import type { CartItem } from '../../context/CartContext';
 
 // Mock CartCard component
 vi.mock('../../components/CartCard', () => ({
-  CartCard: ({ item }: any) => (
-    <article data-testid={`cart-item}`}>
+  CartCard: ({ item, index, onRemove }: { item: CartItem; index: number; onRemove: (index: number) => void }) => (
+    <article data-testid={`cart-item-${index}`}>
       <h2>{item.name}</h2>
       <p>{item.price}</p>
+      <button onClick={() => onRemove(index)}>Remove</button>
     </article>
   ),
 }));

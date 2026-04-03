@@ -7,9 +7,10 @@
 }
 
 .phone-card {
+  position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
-  background: white;
+  background: transparent;
   border: 1px solid #ddd;
   border-radius: 0;
   overflow: hidden;
@@ -17,15 +18,30 @@
   grid-template-rows: 1fr auto;
   text-decoration: none;
   color: inherit;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  transition: box-shadow 0.18s ease, background 0.18s ease;
 }
 
-.phone-card:hover {
-  background: #fafafa;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+.phone-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0));
+  transition: height 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
 }
 
+.phone-card:hover::before {
+  height: 100%;
+}
+
+.phone-card > * {
+  position: relative;
+  z-index: 2;
+}
 .phone-card-image-area {
   display: flex;
   justify-content: center;
@@ -51,20 +67,26 @@
 }
 
 .phone-card-brand {
-  font-size: 0.7rem;
-  color: #666;
   text-transform: uppercase;
+  display: flex;
 }
-
+.phone-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
 .phone-card-model {
-  font-weight: 700;
-  font-size: 0.95rem;
+  font-weight: 300;
+  font-size: 0.90rem;
   margin-top: 0.15rem;
+  display: flex;
+  align-self: flex-start;
 }
 
 .phone-card-price {
-  font-weight: 700;
-  font-size: 0.95rem;
+  font-weight: 300;
+  font-size: 0.90rem;
+  align-self: flex-end;
 }
 
 @media (max-width: 1024px) {

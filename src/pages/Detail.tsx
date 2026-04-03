@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { useApi } from "../hooks/useApi";
 import { useCart } from "../hooks/useCart";
 import { getPhoneById, getPhones } from "../services/phoneApi";
-import { SimilarCard } from "../components/SimilarCard";
+import { SimilarCarousel } from "../components/SimilarCarousel";
 import type { Phone, PhoneDetail } from "../types/phone";
 import "./Detail.css";
 
@@ -33,11 +33,8 @@ export default function Detail() {
         setMainImageUrl(res.imageUrl);
 
         if (res.colorOptions.length > 0) {
-          setSelectedColor(res.colorOptions[0].name);
           setMainImageUrl(res.colorOptions[0].imageUrl || res.imageUrl);
         }
-
-        if (res.storageOptions.length > 0) setSelectedStorage(res.storageOptions[0].capacity);
 
         try {
           const allPhones = await callApi<Phone[]>(getPhones());
@@ -83,7 +80,7 @@ export default function Detail() {
 
   return (
     <div className="detail-container">
-      <Link to="/">← Volver</Link>
+      <Link to="/" className="back-btn">Volver</Link>
 
       <div className="detail-grid">
         <div className="phone-image-wrapper">
@@ -91,13 +88,13 @@ export default function Detail() {
         </div>
 
         <div className="phone-info">
-          <h1>{phone.name}</h1>
+          <h1 className="phone-name">{phone.name}</h1>
           <p className="phone-price">Desde ${phone.basePrice.toFixed(2)}</p>
           <p>{phone.brand}</p>
           <p>{phone.description}</p>
 
           <div className="field">
-            <h3>Almacenamiento</h3>
+            <h3 className="phone-storage-title">Almacenamiento. ¿Cuánto espacio necesitas?</h3>
             <div className="storage-options">
               {phone.storageOptions.map((storage) => (
                 <button
@@ -105,14 +102,14 @@ export default function Detail() {
                   onClick={() => setSelectedStorage(storage.capacity)}
                   className={selectedStorage === storage.capacity ? "selected" : ""}
                 >
-                  {storage.capacity} (+${storage.price})
+                  {storage.capacity}
                 </button>
               ))}
             </div>
           </div>
 
           <div className="field">
-            <h3>Color</h3>
+            <h3 className="phone-color-title">Color. Escoge tu favorito</h3>
             <div className="color-options">
               {phone.colorOptions.map((color) => (
                 <button
@@ -140,17 +137,6 @@ export default function Detail() {
         </div>
       </div>
 
-      {similarPhones.length > 0 && (
-        <div className="similar-carousel-wrapper">
-          <h2>Productos similares</h2>
-          <div className="similar-carousel">
-            {similarPhones.map((model) => (
-              <SimilarCard key={model.id} phone={model} />
-            ))}
-          </div>
-        </div>
-      )}
-
       <div className="spec-table-wrapper">
         <h2>Especificaciones</h2>
         <table className="spec-table">
@@ -164,6 +150,13 @@ export default function Detail() {
           </tbody>
         </table>
       </div>
+
+      {similarPhones.length > 0 && (
+        <div className="similar-products">
+          <h2>Productos similares</h2>
+          <SimilarCarousel phones={similarPhones} />
+        </div>
+      )}
     </div>
   );
 }

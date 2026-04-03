@@ -14,7 +14,7 @@ const PhoneCard: React.FC<PhoneCardProps> = ({ phone }) => {
         <img src={phone.imageUrl} alt={phone.name} />
       </div>
       <div className="phone-card-row">
-        <div>
+        <div className="phone-card-info">
           <div className="phone-card-brand">{phone.brand}</div>
           <div className="phone-card-model">{phone.name}</div>
         </div>

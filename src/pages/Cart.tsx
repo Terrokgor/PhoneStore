@@ -33,7 +33,7 @@ export default function Cart() {
           </section>
 
           <footer className="cart-footer">
-            <Link to="/" className="btn-light">CONTINUE SHOPPING</Link>
+            <Link to="/" className="btn-light">Continuar comprando</Link>
             <div className="cart-summary">
               <span>TOTAL</span>
               <strong>{total.toFixed(2)} EUR</strong>

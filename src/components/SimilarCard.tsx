@@ -14,7 +14,7 @@ export const SimilarCard = memo(({ phone }: SimilarCardProps) => {
         <img src={phone.imageUrl} alt={phone.name} />
       </div>
       <div className="similar-card-row">
-        <div>
+        <div className="similar-card-info">
           <div className="similar-card-brand">{phone.brand}</div>
           <div className="similar-card-model">{phone.name}</div>
         </div>

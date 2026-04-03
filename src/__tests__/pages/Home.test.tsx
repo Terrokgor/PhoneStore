@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Home from '../../pages/Home';
 import { CartProvider } from '../../context/CartContext';
+import type { Phone } from '../../types/phone';
 
 // Mock the hooks
 vi.mock('../../hooks/useApi', () => ({
@@ -17,7 +18,7 @@ vi.mock('../../hooks/useDebounce', () => ({
 
 // Mock PhoneCard component
 vi.mock('../../components/PhoneCard', () => ({
-  default: ({ phone }: any) => <div data-testid="phone-card">{phone.name}</div>,
+  default: ({ phone }: { phone: Phone }) => <div data-testid="phone-card">{phone.name}</div>,
 }));
 
 describe('Home Page', () => {

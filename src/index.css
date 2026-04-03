@@ -30,6 +30,37 @@
   }
 }
 
+/* Global text styles */
+* {
+  font-weight: 300;
+  font-size: 12px;
+  color: #000000;
+}
+
+@media (prefers-color-scheme: dark) {
+  * {
+    color: #ffffff;
+  }
+}
+
+/* Override for headings and larger text */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 400;
+  font-size: 16px;
+}
+
+button {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+/* Exception for brand text in phone components */
+.phone-card-brand,
+.similar-card-brand {
+  color: #79736D !important;
+  font-size: 10px !important;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #9ca3af;

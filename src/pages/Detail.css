@@ -1,8 +1,33 @@
 /* Detail page styles */
 .detail-container {
+  position: relative;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 1.5rem 1rem 1rem;
+}
+
+.back-btn {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 20;
+  display: inline-block;
+  padding: 0.5rem 0.8rem;
+  background: rgba(0, 0, 0, 0.07);
+  border: 1px solid #ccc;
+  color: #111;
+  text-decoration: none;
+  border-radius: 3px;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.back-btn:hover {
+  background: rgba(0, 0, 0, 0.13);
+}
+
+.back-btn:active {
+  opacity: 0.7;
+  transform: scale(0.98);
 }
 
 @media (max-width: 768px) {
@@ -44,8 +69,8 @@
 }
 
 .phone-price {
-  font-size: 1.8rem;
-  font-weight: 700;
+  font-size: 1.2rem;
+  font-weight: 300;
   margin: 0.25rem 0 1rem;
 }
 
@@ -55,13 +80,14 @@
 
 .add-cart-btn {
   margin-top: 1rem;
-  background: #202020;
+  background: #1B1A18;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 1px;
   padding: 0.8rem 1.2rem;
   font-weight: 700;
   cursor: pointer;
+  width: 100%;
 }
 
 .add-cart-btn:hover {
@@ -85,36 +111,30 @@
 
 .spec-table th,
 .spec-table td {
-  border: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  border-left: none;
+  border-right: none;
   padding: 0.75rem;
   text-align: left;
+  font-weight: 300;
+  font-size: 12px;
 }
 
 .spec-table th {
-  background: #f5f5f5;
   width: 180px;
 }
 
-.similar-carousel-wrapper {
-  margin-top: 2rem;
-}
-
-.similar-carousel-wrapper h2 {
-  margin-bottom: 0.75rem;
-}
-
-.similar-carousel {
+.color-options {
   display: flex;
-  gap: 0.75rem;
-  overflow-x: auto;
-  padding-bottom: 0.5rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 1rem 0;
 }
 
-.color-options,
 .storage-options {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
   margin: 1rem 0;
 }
 
@@ -123,7 +143,8 @@
   height: 40px;
   min-width: 40px;
   min-height: 40px;
-  border-radius: 8px;
+  border-radius: 1px;
+  border-width: 1px;
   border: 1px solid #ddd;
   outline: none;
   cursor: pointer;
@@ -132,19 +153,19 @@
 }
 
 .color-options button.selected {
-  border-width: 3px;
+  border-width: 1px;
   border-color: #000;
   background: #ddd;
 }
 
 .storage-options button {
-  padding: 0.5rem 0.75rem;
-  border-radius: 6px;
+  padding: 1rem 0.25rem;
+  border-radius: 1px;
   border: 1px solid #ccc;
   background: #f8f8f8;
   color: #202020;
-  font-weight: 500;
-  min-width: 120px;
+  font-weight: 300;
+  min-width: 95px;
   white-space: nowrap;
   transition: all 0.2s ease;
   cursor: pointer;
@@ -161,7 +182,32 @@
   background: #dfe7ff;
   border-color: #4a6df5;
   color: #1b2f65;
-  font-weight: 700;
+  font-weight: 300;
+}
+
+.similar-products {
+  margin-top: 3rem;
+}
+
+.phone-name {
+  font-size: 1.5rem;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.phone-color-title {
+  font-size: 1rem;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.phone-storage-title {
+  font-size: 1rem;
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
 }
 
 @media (max-width: 768px) {
