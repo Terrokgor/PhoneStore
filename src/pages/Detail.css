@@ -30,6 +30,18 @@
   transform: scale(0.98);
 }
 
+@media (prefers-color-scheme: dark) {
+  .back-btn {
+    background: rgba(255, 255, 255, 0.09);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+
+  .back-btn:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
+}
+
 @media (max-width: 768px) {
   .detail-container {
     padding: 0.5rem;
