@@ -13,16 +13,13 @@
   z-index: 20;
   display: inline-block;
   padding: 0.5rem 0.8rem;
-  background: rgba(0, 0, 0, 0.07);
-  border: 1px solid #ccc;
+
   color: #111;
   text-decoration: none;
   border-radius: 3px;
-  transition: transform 0.15s ease, opacity 0.15s ease;
-}
-
-.back-btn:hover {
-  background: rgba(0, 0, 0, 0.13);
+  border: transparent;
+  background-color: transparent;
+  background: transparent;
 }
 
 .back-btn:active {
@@ -32,9 +29,9 @@
 
 @media (prefers-color-scheme: dark) {
   .back-btn {
-    background: rgba(255, 255, 255, 0.09);
+    /* background: rgba(255, 255, 255, 0.09); */
     color: #fff;
-    border-color: rgba(255, 255, 255, 0.18);
+    /* border-color: rgba(255, 255, 255, 0.18); */
   }
 
   .back-btn:hover {
@@ -84,6 +81,7 @@
   font-size: 1.2rem;
   font-weight: 300;
   margin: 0.25rem 0 1rem;
+  min-height: 1.5rem;
 }
 
 .field {
@@ -92,7 +90,7 @@
 
 .add-cart-btn {
   margin-top: 1rem;
-  background: #1B1A18;
+  background: #1b1a18;
   color: white;
   border: none;
   border-radius: 1px;
@@ -151,16 +149,16 @@
 }
 
 .color-options button {
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
-  min-height: 40px;
+  width: 30px;
+  height: 30px;
+  max-width: 30px;
+  min-height: 30px;
   border-radius: 1px;
   border-width: 1px;
   border: 1px solid #ddd;
   outline: none;
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  /* padding: 0.5rem 1rem; */
   background: white;
 }
 
@@ -220,6 +218,13 @@
   font-weight: 300;
   margin-bottom: 0.5rem;
   text-transform: uppercase;
+}
+
+.selected-color {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 300;
+  min-height: 1.5rem;
 }
 
 @media (max-width: 768px) {

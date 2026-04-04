@@ -19,7 +19,7 @@ export default function Cart() {
   return (
     <div className="cart-container">
       <header className="cart-header">
-        <h1>CART ({cart.length})</h1>
+        <h1>Carrito ({cart.length})</h1>
       </header>
 
       {cart.length === 0 ? (
@@ -38,7 +38,7 @@ export default function Cart() {
               <span>TOTAL</span>
               <strong>{total.toFixed(2)} EUR</strong>
             </div>
-            <button className="btn-primary">PAY</button>
+            <button className="btn-primary">PAGAR</button>
           </footer>
         </>
       )}

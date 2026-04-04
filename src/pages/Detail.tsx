@@ -17,9 +17,11 @@ export default function Detail() {
   const [mainImageUrl, setMainImageUrl] = useState<string>("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [selectedColor, setSelectedColor] = useState<string>("");
+  const [selectedColor, setSelectedColor] = useState<string>(
+    phone?.colorOptions[0]?.name || "",
+  );
   const [selectedStorage, setSelectedStorage] = useState<string>("");
-
+  const [colorNamePreview, setColorNamePreview] = useState<string>("");
   useEffect(() => {
     if (!id) return;
 
@@ -58,8 +60,13 @@ export default function Detail() {
     fetchPhone();
   }, [id, callApi]);
 
-  const selectedStorageOption = phone?.storageOptions.find(s => s.capacity === selectedStorage);
-  const totalPrice = phone && selectedStorageOption ? phone.basePrice + selectedStorageOption.price : 0;
+  const selectedStorageOption = phone?.storageOptions.find(
+    (s) => s.capacity === selectedStorage,
+  );
+  const totalPrice =
+    phone && selectedStorageOption
+      ? phone.basePrice + selectedStorageOption.price
+      : 0;
 
   const handleAddToCart = () => {
     if (!phone || !selectedColor || !selectedStorage) return;
@@ -80,34 +87,45 @@ export default function Detail() {
 
   return (
     <div className="detail-container">
-      <Link to="/" className="back-btn">Volver</Link>
+      <Link to="/" className="back-btn">
+        {"< Volver"}
+      </Link>
 
       <div className="detail-grid">
         <div className="phone-image-wrapper">
-          <img src={mainImageUrl || phone.imageUrl} alt={phone.name} className="phone-image" />
+          <img
+            src={mainImageUrl || phone.imageUrl}
+            alt={phone.name}
+            className="phone-image"
+          />
         </div>
 
         <div className="phone-info">
           <h1 className="phone-name">{phone.name}</h1>
-          <p className="phone-price">Desde ${phone.basePrice.toFixed(2)}</p>
+          {
+            <p className="phone-price">{totalPrice > 0 && (totalPrice.toFixed(2) +"EUR")}{" "}</p>
+          }
+          {/* <p className="total-price">Precio total: ${totalPrice.toFixed(2)}</p> */}
           <p>{phone.brand}</p>
           <p>{phone.description}</p>
-
           <div className="field">
-            <h3 className="phone-storage-title">Almacenamiento. ¿Cuánto espacio necesitas?</h3>
+            <h3 className="phone-storage-title">
+              Almacenamiento. ¿Cuánto espacio necesitas?
+            </h3>
             <div className="storage-options">
               {phone.storageOptions.map((storage) => (
                 <button
                   key={storage.capacity}
                   onClick={() => setSelectedStorage(storage.capacity)}
-                  className={selectedStorage === storage.capacity ? "selected" : ""}
+                  className={
+                    selectedStorage === storage.capacity ? "selected" : ""
+                  }
                 >
                   {storage.capacity}
                 </button>
               ))}
             </div>
           </div>
-
           <div className="field">
             <h3 className="phone-color-title">Color. Escoge tu favorito</h3>
             <div className="color-options">
@@ -119,14 +137,21 @@ export default function Detail() {
                     setSelectedColor(color.name);
                     setMainImageUrl(color.imageUrl || phone.imageUrl);
                   }}
+                  onMouseEnter={() => {
+                    setColorNamePreview(color.name);
+                  }}
+                  onMouseLeave={() => {
+                    setColorNamePreview("");
+                  }}
                   className={selectedColor === color.name ? "selected" : ""}
                   style={{ backgroundColor: color.hexCode }}
                 />
               ))}
             </div>
+            <div className="selected-color">
+              {colorNamePreview ? colorNamePreview : selectedColor}{" "}
+            </div>
           </div>
-
-          <p className="total-price">Precio total: ${totalPrice.toFixed(2)}</p>
           <button
             className="add-cart-btn"
             onClick={handleAddToCart}
@@ -141,12 +166,30 @@ export default function Detail() {
         <h2>Especificaciones</h2>
         <table className="spec-table">
           <tbody>
-            <tr><th>Marca</th><td>{phone.brand}</td></tr>
-            <tr><th>Modelo</th><td>{phone.name}</td></tr>
-            <tr><th>Descripción</th><td>{phone.description}</td></tr>
-            <tr><th>Precio base</th><td>{phone.basePrice.toFixed(2)}</td></tr>
-            <tr><th>Almacenamiento</th><td>{phone.storageOptions.map((s) => s.capacity).join(', ')}</td></tr>
-            <tr><th>Colores</th><td>{phone.colorOptions.map((c) => c.name).join(', ')}</td></tr>
+            <tr>
+              <th>Marca</th>
+              <td>{phone.brand}</td>
+            </tr>
+            <tr>
+              <th>Modelo</th>
+              <td>{phone.name}</td>
+            </tr>
+            <tr>
+              <th>Descripción</th>
+              <td>{phone.description}</td>
+            </tr>
+            <tr>
+              <th>Precio base</th>
+              <td>{phone.basePrice.toFixed(2)}</td>
+            </tr>
+            <tr>
+              <th>Almacenamiento</th>
+              <td>{phone.storageOptions.map((s) => s.capacity).join(", ")}</td>
+            </tr>
+            <tr>
+              <th>Colores</th>
+              <td>{phone.colorOptions.map((c) => c.name).join(", ")}</td>
+            </tr>
           </tbody>
         </table>
       </div>
