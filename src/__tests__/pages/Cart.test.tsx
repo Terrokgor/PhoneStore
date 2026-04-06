@@ -47,7 +47,7 @@ describe('Cart Page', () => {
 
   it('displays cart header title', () => {
     renderCart();
-    const heading = screen.getByRole('heading', { name: /cart/i });
+    const heading = screen.getByRole('heading', { name: 'Carrito (0)' });
     expect(heading).toBeInTheDocument();
   });
 
