@@ -103,9 +103,10 @@ export default function Detail() {
         <div className="phone-info">
           <h1 className="phone-name">{phone.name}</h1>
           {
-            <p className="phone-price">{totalPrice > 0 && (totalPrice.toFixed(2) +"EUR")}{" "}</p>
+            <p className="phone-price">
+              {totalPrice > 0 && totalPrice.toFixed(2) + "EUR"}{" "}
+            </p>
           }
-          {/* <p className="total-price">Precio total: ${totalPrice.toFixed(2)}</p> */}
           <p>{phone.brand}</p>
           <p>{phone.description}</p>
           <div className="field">

@@ -1,11 +1,12 @@
 .cart-card {
-  display: grid;
+  display: flex;
   grid-template-columns: 180px 1fr;
   gap: 1rem;
   border: 1px solid #e2e2e2;
-  border-radius: 8px;
+  border-radius: 1px;
   padding: 1rem;
   align-items: center;
+  width: 300px;
 }
 
 .cart-card-image {
@@ -13,17 +14,26 @@
   max-width: 170px;
   height: auto;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 1px;
+}
+.cart-card-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .cart-card-details h2 {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 12px;
+  font-weight: 300;
 }
 
 .cart-card-details p {
   margin: 0.2rem 0;
-  color: #54545f;
+  font-size: 12px;
+  font-weight: 300;
 }
 
 .cart-price {
@@ -37,7 +47,9 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 300;
+  font-size: 12px;
+  padding-left:0px
 }
 
 @media (max-width: 768px) {

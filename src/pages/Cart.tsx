@@ -25,23 +25,28 @@ export default function Cart() {
       {cart.length === 0 ? (
         <p className="empty-cart">El carrito está vacío</p>
       ) : (
-        <>
-          <section className="cart-list">
-            {cart.map((item, index) => (
-              <CartCard key={index} item={item} index={index} onRemove={removeFromCart} />
-            ))}
-          </section>
-
-          <footer className="cart-footer">
-            <Link to="/" className="btn-light">Continuar comprando</Link>
-            <div className="cart-summary">
-              <span>TOTAL</span>
-              <strong>{total.toFixed(2)} EUR</strong>
-            </div>
-            <button className="btn-primary">PAGAR</button>
-          </footer>
-        </>
+        <section className="cart-list">
+          {cart.map((item, index) => (
+            <CartCard
+              key={index}
+              item={item}
+              index={index}
+              onRemove={removeFromCart}
+            />
+          ))}
+        </section>
       )}
+
+      <footer className="cart-footer">
+        <Link to="/" className="btn-light">
+          Continuar comprando
+        </Link>
+        <div className="cart-summary">
+          <span>TOTAL</span>
+          <strong>{total.toFixed(2)} EUR</strong>
+        </div>
+        <button className="btn-primary">PAGAR</button>
+      </footer>
     </div>
   );
 }
